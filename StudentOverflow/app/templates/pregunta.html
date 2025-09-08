@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Hacer una pregunta</h2>
+<form method="post">
+  <label>Título
+    <input type="text" name="title" value="{{ title or '' }}" required />
+  </label>
+  <label>Descripcion
+    <textarea name="body" rows="6">{{ body or '' }}</textarea>
+  </label>
+  <button type="submit">Publicar</button>
+</form>
+{% endblock %}

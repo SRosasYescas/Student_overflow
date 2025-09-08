@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Preguntas De Estudiantes</h2>
+{% if questions %}
+  <ul>
+  {% for q in questions %}
+    <li>
+      <a href="{{ url_for('q.detail', id=q.id) }}"><strong>{{ q.title }}</strong></a><br>
+      <span class="muted">por {{ q.profiles.email }} · {{ q.created_at }}</span>
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay preguntas aun. ¡Se la primera persona en preguntar!</p>
+{% endif %}
+{% endblock %}

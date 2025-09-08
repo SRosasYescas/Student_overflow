@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Overflow Proyecto </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+      header, main { max-width: 900px; margin: 0 auto; }
+      .muted { color: #666; font-size: .9em; }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <nav>
+          <ul>
+            <li><strong><a href="{{ url_for('q.index') }}">Student Overflow Hybridge</a></strong></li>
+          </ul>
+          <ul>
+            {% if current_user %}
+              <li class="muted">{{ current_user.email }}</li>
+              <li><a href="{{ url_for('q.ask') }}">Preguntar</a></li>
+              <li><a href="{{ url_for('auth.logout') }}">Salir</a></li>
+            {% else %}
+              <li><a href="{{ url_for('auth.login') }}">Entrar</a></li>
+              <li><a href="{{ url_for('auth.register') }}">Registro</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+    </header>
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+          {% if messages %}
+          <article>
+            {% for cat, msg in messages %}
+              <div role="alert" class="{{ cat }}">{{ msg }}</div>
+            {% endfor %}
+          </article>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

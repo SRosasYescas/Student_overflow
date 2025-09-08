@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Crear cuenta</h2>
+<form method="post">
+  <label>Email
+    <input type="email" name="email" required />
+  </label>
+  <label>Contraseña
+    <input type="password" name="password" required />
+  </label>
+  <button type="submit">Registrarme</button>
+</form>
+<p class="muted">¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión</a></p>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<article>
+  <h2>{{ q.title }}</h2>
+  <p>{{ q.body }}</p>
+  <p class="muted">por {{ q.profiles.email }} · {{ q.created_at }}</p>
+</article>
+
+<section>
+  <h3>Respuestas!!</h3>
+  {% if answers %}
+    <ul>
+      {% for a in answers %}
+        <li>
+          <p>{{ a.body }}</p>
+          <p class="muted">por {{ a.profiles.email }} · {{ a.created_at }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Aún no hay respuestas.</p>
+  {% endif %}
+</section>
+
+{% if current_user %}
+<section>
+  <h3>Tu respuesta</h3>
+  <form method="post" action="{{ url_for('q.answer', q_id=q.id) }}">
+    <textarea name="body" rows="5" required></textarea>
+    <button type="submit">Responder</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}
